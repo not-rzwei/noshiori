@@ -8,5 +8,5 @@
 import { Vue, Component } from "vue-property-decorator";
 
 @Component
-export default class Novel extends Vue {}
+export default class NovelList extends Vue {}
 </script>
