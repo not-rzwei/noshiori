@@ -12,8 +12,8 @@ namespace Novel {
   }
 
   export enum Marker {
-    Volume,
-    Chapter
+    Volume = "Volume",
+    Chapter = "Chapter"
   }
 }
 
