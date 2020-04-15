@@ -4,6 +4,7 @@ interface Novel {
   kind: Novel.Kind;
   marker: Novel.Marker;
   progress: number;
+  link?: string;
 }
 
 namespace Novel {

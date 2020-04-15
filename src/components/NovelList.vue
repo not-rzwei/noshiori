@@ -24,6 +24,15 @@
           class="mt-3"
           outlined
         >
+          <template v-slot:cell(title)="data">
+            <b-link :href="data.item.link" target="blank" v-if="data.item.link">
+              {{ data.item.title }}
+            </b-link>
+            <template v-else>
+              {{ data.item.title }}
+            </template>
+          </template>
+
           <template v-slot:cell(progress)="data">
             {{ markerShorthand[data.item.marker] }} {{ data.item.progress }}
           </template>
