@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    Hello world
+    <Novel />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Novel from "@/components/Novel.vue";
 
 @Component({
-  components: {}
+  components: {
+    Novel
+  }
 })
 export default class App extends Vue {}
 </script>
