@@ -36,7 +36,7 @@ export default class NovelList extends Vue {
   ];
 
   addToList(novel: Novel): void {
-    console.log(novel);
+    this.list.push(novel);
   }
 }
 </script>
