@@ -13,30 +13,21 @@
 import { Vue, Component } from "vue-property-decorator";
 import NovelForm from "@/components/NovelForm.vue";
 import Novel from "@/models/Novel";
+import { db } from "@/db";
 
 @Component({
   components: {
     NovelForm
+  },
+  firestore: {
+    list: db.collection("list").orderBy("title")
   }
 })
 export default class NovelList extends Vue {
-  list: Novel[] = [
-    {
-      title: "Isaac",
-      kind: Novel.Kind.WebNovel,
-      marker: Novel.Marker.Chapter,
-      progress: 31
-    },
-    {
-      title: "Tutorial is Too Hard",
-      kind: Novel.Kind.WebNovel,
-      marker: Novel.Marker.Chapter,
-      progress: 100
-    }
-  ];
+  list: Novel[] = [];
 
   addToList(novel: Novel): void {
-    this.list.push(novel);
+    db.collection("list").add(novel);
   }
 }
 </script>

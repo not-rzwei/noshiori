@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submit">
-    <input placeholder="Novel title" v-model="novel.title" />
+    <input placeholder="Novel title" v-model="novel.title" required />
 
     <select v-model="novel.kind">
       <option value disabled>Marker</option>
