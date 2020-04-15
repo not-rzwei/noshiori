@@ -30,7 +30,7 @@
           </template>
         </b-table>
 
-        <NovelModal :id="modal.id" :novel="modal.novel" />
+        <NovelModal :id="modal.id" :novel="modal.novel" @added="updateNovel" />
       </b-col>
     </b-row>
   </b-container>
@@ -64,9 +64,24 @@ export default class NovelList extends Vue {
     db.collection("list").add(novel);
   }
 
+  updateNovel(novel: Novel): void {
+    const id = novel.id;
+    const data = { ...novel };
+
+    db.collection("list")
+      .doc(id)
+      .set(data)
+      .then(() => {
+        console.log("Updated");
+      });
+  }
+
   info(novel: Novel): void {
-    this.modal.novel = novel;
-    this.$bvModal.show("modal");
+    const copy = JSON.parse(JSON.stringify(novel));
+    copy.id = novel.id;
+
+    this.modal.novel = copy;
+    this.$root.$emit("bv::show::modal", this.modal.id);
   }
 }
 </script>

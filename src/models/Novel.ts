@@ -1,4 +1,5 @@
 interface Novel {
+  id: string;
   title: string;
   kind: Novel.Kind;
   marker: Novel.Marker;

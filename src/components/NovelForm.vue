@@ -48,6 +48,7 @@ export default class NovelForm extends Vue {
 
   get placeholder(): Novel {
     return {
+      id: "",
       title: "",
       kind: Novel.Kind.WebNovel,
       marker: Novel.Marker.Chapter,
