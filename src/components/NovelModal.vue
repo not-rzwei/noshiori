@@ -38,6 +38,14 @@
         </b-row>
       </b-form-group>
 
+      <b-form-group label="Link">
+        <b-form-input
+          type="url"
+          v-model="novel.link"
+          placeholder="Link to translator or novelupdates"
+        ></b-form-input>
+      </b-form-group>
+
       <b-button type="submit" block>Save</b-button>
     </form>
   </b-modal>
