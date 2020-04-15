@@ -1,26 +1,34 @@
 <template>
-  <form @submit.prevent="submit">
-    <input placeholder="Novel title" v-model="novel.title" required />
+  <b-form inline @submit.prevent="submit">
+    <b-input
+      class="mb-2 mr-sm-2 mb-sm-0"
+      placeholder="Title"
+      v-model="novel.title"
+      required
+    ></b-input>
 
-    <select v-model="novel.kind">
-      <option value disabled>Marker</option>
-      <option v-for="kind in kinds" :key="kind">{{ kind }}</option>
-    </select>
+    <b-form-select
+      class="mb-2 mr-sm-2 mb-sm-0"
+      :options="kinds"
+      v-model="novel.kind"
+    ></b-form-select>
 
-    <select v-model="novel.marker">
-      <option value disabled>Kind</option>
-      <option v-for="marker in markers" :key="marker">{{ marker }}</option>
-    </select>
+    <b-form-select
+      class="mb-2 mr-sm-2 mb-sm-0"
+      :options="markers"
+      v-model="novel.marker"
+    ></b-form-select>
 
-    <input
+    <b-form-input
+      class="mb-2 mr-sm-2 mb-sm-0"
       type="number"
-      min="0"
       placeholder="Progress"
+      min="0"
       v-model="novel.progress"
-    />
+    ></b-form-input>
 
-    <input type="submit" value="Add" />
-  </form>
+    <b-button type="submit" variant="primary">Save</b-button>
+  </b-form>
 </template>
 
 <script lang="ts">
@@ -29,8 +37,8 @@ import Novel from "@/models/Novel";
 
 @Component
 export default class NovelForm extends Vue {
-  markers = Novel.Marker;
-  kinds = Novel.Kind;
+  markers = Object.values(Novel.Marker);
+  kinds = Object.values(Novel.Kind);
   novel = this.placeholder;
 
   submit(): void {

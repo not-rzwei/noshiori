@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <NovelForm @added="addToList" />
+  <b-container fluid="sm">
+    <b-row>
+      <b-col>
+        <NovelForm @added="addToList" />
+      </b-col>
+    </b-row>
     <ul>
       <li v-for="novel in list" :key="novel.title">
         {{ novel.title }} - {{ novel.marker }} {{ novel.progress }}
       </li>
     </ul>
-  </div>
+  </b-container>
 </template>
 
 <script lang="ts">
@@ -27,7 +31,8 @@ export default class NovelList extends Vue {
   list: Novel[] = [];
 
   addToList(novel: Novel): void {
-    db.collection("list").add(novel);
+    // db.collection("list").add(novel);
+    console.log(novel);
   }
 }
 </script>
