@@ -56,12 +56,6 @@ export default class NovelModal extends Vue {
   markers = Object.values(Novel.Marker);
   kinds = Object.values(Novel.Kind);
 
-  constructor() {
-    super();
-
-    console.log(this.novel.kind);
-  }
-
   save(): void {
     this.$emit("added", this.novel);
     this.$root.$emit("bv::hide::modal", this.id);
