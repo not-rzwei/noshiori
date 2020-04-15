@@ -19,12 +19,18 @@
             {{ data.item.marker }} {{ data.item.progress }}
           </template>
 
+          <template v-slot:cell(action)="data">
+            <b-button size="sm" @click="info(data.item)">Edit</b-button>
+          </template>
+
           <template v-slot:table-busy>
             <div class="text-center text-danger my-2">
               <b-spinner class="align-middle"></b-spinner>
             </div>
           </template>
         </b-table>
+
+        <NovelModal :id="modal.id" :novel="modal.novel" />
       </b-col>
     </b-row>
   </b-container>
@@ -33,12 +39,14 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import NovelForm from "@/components/NovelForm.vue";
+import NovelModal from "@/components/NovelModal.vue";
 import Novel from "@/models/Novel";
 import { db } from "@/db";
 
 @Component({
   components: {
-    NovelForm
+    NovelForm,
+    NovelModal
   },
   firestore: {
     list: db.collection("list").orderBy("title")
@@ -46,11 +54,19 @@ import { db } from "@/db";
 })
 export default class NovelList extends Vue {
   list: Novel[] = [];
-  fields = [{ key: "title", sortable: true }, "kind", "progress"];
+  fields = [{ key: "title", sortable: true }, "progress", "action"];
+  modal = {
+    id: "modal",
+    novel: {}
+  };
 
   addToList(novel: Novel): void {
-    // db.collection("list").add(novel);
-    console.log(novel);
+    db.collection("list").add(novel);
+  }
+
+  info(novel: Novel): void {
+    this.modal.novel = novel;
+    this.$bvModal.show("modal");
   }
 }
 </script>
