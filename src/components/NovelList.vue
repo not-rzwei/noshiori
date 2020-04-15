@@ -2,7 +2,16 @@
   <b-container fluid="sm">
     <b-row>
       <b-col>
-        <NovelForm @added="addToList" />
+        <h3>ノベルの栞</h3>
+      </b-col>
+      <b-col align="right">
+        <b-button v-b-modal.new-modal variant="primary">Add Novel</b-button>
+        <NovelModal
+          id="new-modal"
+          :novel="{}"
+          title="New Novel"
+          @added="addToList"
+        />
       </b-col>
     </b-row>
 
@@ -16,7 +25,7 @@
           outlined
         >
           <template v-slot:cell(progress)="data">
-            {{ data.item.marker }} {{ data.item.progress }}
+            {{ markerShorthand[data.item.marker] }} {{ data.item.progress }}
           </template>
 
           <template v-slot:cell(action)="data">
@@ -30,7 +39,12 @@
           </template>
         </b-table>
 
-        <NovelModal :id="modal.id" :novel="modal.novel" @added="updateNovel" />
+        <NovelModal
+          :id="modal.id"
+          :novel="modal.novel"
+          title="Edit Novel"
+          @added="updateNovel"
+        />
       </b-col>
     </b-row>
   </b-container>
@@ -38,14 +52,12 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import NovelForm from "@/components/NovelForm.vue";
 import NovelModal from "@/components/NovelModal.vue";
 import Novel from "@/models/Novel";
 import { db } from "@/db";
 
 @Component({
   components: {
-    NovelForm,
     NovelModal
   },
   firestore: {
@@ -55,6 +67,10 @@ import { db } from "@/db";
 export default class NovelList extends Vue {
   list: Novel[] = [];
   fields = [{ key: "title", sortable: true }, "progress", "action"];
+  markerShorthand = {
+    Chapter: "ch.",
+    Volume: "vol."
+  };
   modal = {
     id: "modal",
     novel: {}
