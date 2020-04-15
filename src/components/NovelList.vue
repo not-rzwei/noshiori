@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NovelForm @added="addToList" />
     <ul>
       <li v-for="novel in list" :key="novel.title">
         {{ novel.title }} - {{ novel.marker }} {{ novel.progress }}
@@ -10,9 +11,14 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import NovelForm from "@/components/NovelForm.vue";
 import Novel from "@/models/Novel";
 
-@Component
+@Component({
+  components: {
+    NovelForm
+  }
+})
 export default class NovelList extends Vue {
   list: Novel[] = [
     {
@@ -28,5 +34,9 @@ export default class NovelList extends Vue {
       progress: 100
     }
   ];
+
+  addToList(novel: Novel): void {
+    console.log(novel);
+  }
 }
 </script>
