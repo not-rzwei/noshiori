@@ -20,7 +20,7 @@
     ></b-form-select>
 
     <b-form-input
-      class="mb-2 mr-sm-2 mb-sm-0"
+      class="mb-2 mr-sm-2 mb-sm-0 number"
       type="number"
       placeholder="Progress"
       min="0"
@@ -56,3 +56,11 @@ export default class NovelForm extends Vue {
   }
 }
 </script>
+
+<style scoped>
+@media (min-width: 576px) {
+  .number {
+    width: 100px;
+  }
+}
+</style>

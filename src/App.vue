@@ -22,5 +22,6 @@ export default class App extends Vue {}
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   font-weight: 400;
   color: #2c3e50;
+  margin-top: 2rem;
 }
 </style>

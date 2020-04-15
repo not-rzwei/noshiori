@@ -5,11 +5,28 @@
         <NovelForm @added="addToList" />
       </b-col>
     </b-row>
-    <ul>
-      <li v-for="novel in list" :key="novel.title">
-        {{ novel.title }} - {{ novel.marker }} {{ novel.progress }}
-      </li>
-    </ul>
+
+    <b-row>
+      <b-col>
+        <b-table
+          :items="list"
+          :busy="!list.length"
+          :fields="fields"
+          class="mt-3"
+          outlined
+        >
+          <template v-slot:cell(progress)="data">
+            {{ data.item.marker }} {{ data.item.progress }}
+          </template>
+
+          <template v-slot:table-busy>
+            <div class="text-center text-danger my-2">
+              <b-spinner class="align-middle"></b-spinner>
+            </div>
+          </template>
+        </b-table>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -29,6 +46,7 @@ import { db } from "@/db";
 })
 export default class NovelList extends Vue {
   list: Novel[] = [];
+  fields = [{ key: "title", sortable: true }, "kind", "progress"];
 
   addToList(novel: Novel): void {
     // db.collection("list").add(novel);
