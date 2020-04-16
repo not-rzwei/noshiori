@@ -2,10 +2,10 @@
   <b-container fluid="sm">
     <b-row>
       <b-col>
-        <h3>ノベルの栞</h3>
+        <h3>ノベルの栞 📖🔖</h3>
       </b-col>
       <b-col align="right">
-        <b-button v-b-modal.new-modal variant="primary">Add Novel</b-button>
+        <b-button v-b-modal.new-modal variant="primary">＋ 🔖</b-button>
         <NovelModal
           id="new-modal"
           :novel="{}"
@@ -38,7 +38,14 @@
           </template>
 
           <template v-slot:cell(action)="data">
-            <b-button size="sm" @click="info(data.item)">Edit</b-button>
+            <b-button-group>
+              <b-button @click="info(data.item)">✎</b-button>
+              <b-button
+                variant="outline-secondary"
+                @click="updateProgress(data.item)"
+                >⇧</b-button
+              >
+            </b-button-group>
           </template>
 
           <template v-slot:table-busy>
@@ -92,6 +99,7 @@ export default class NovelList extends Vue {
   updateNovel(novel: Novel): void {
     const id = novel.id;
     const data = { ...novel };
+    delete data.id;
 
     db.collection("list")
       .doc(id)
@@ -107,6 +115,11 @@ export default class NovelList extends Vue {
 
     this.modal.novel = copy;
     this.$root.$emit("bv::show::modal", this.modal.id);
+  }
+
+  updateProgress(novel: Novel): void {
+    novel.progress += 1;
+    this.updateNovel(novel);
   }
 }
 </script>
