@@ -18,8 +18,8 @@
       </b-form-group>
 
       <b-form-group label="Progress">
-        <b-row>
-          <b-col>
+        <b-row no-gutters>
+          <b-col class="mr-sm-2">
             <b-form-select :options="markers" v-model="novel.marker">
               <b-form-select-option disabled :value="undefined"
                 >Marker</b-form-select-option
@@ -65,6 +65,7 @@ export default class NovelModal extends Vue {
   kinds = Object.values(Novel.Kind);
 
   save(): void {
+    this.novel.progress = Number(this.novel.progress);
     this.$emit("added", this.novel);
     this.$root.$emit("bv::hide::modal", this.id);
   }
