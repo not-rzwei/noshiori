@@ -2,6 +2,7 @@
 
 module.exports = {
   pwa: {
+    assetsVersion: Math.floor(new Date() / 1000),
     name: "Novel Shiori",
     themeColor: "#D7BA89",
     msTileColor: "#D7BA89",
