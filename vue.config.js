@@ -1,10 +1,17 @@
+/* eslint @typescript-eslint/camelcase: off */
+
 module.exports = {
   pwa: {
-    name: "My App",
-    themeColor: "#4DBA87",
-    msTileColor: "#000000",
+    name: "Novel Shiori",
+    themeColor: "#D7BA89",
+    msTileColor: "#D7BA89",
     appleMobileWebAppCapable: "yes",
-    appleMobileWebAppStatusBarStyle: "black"
+    appleMobileWebAppStatusBarStyle: "black",
+    manifestOptions: {
+      short_name: "noshiori",
+      background_color: "#D7BA89",
+      orientation: "landscape"
+    }
   },
   chainWebpack: config => {
     config.plugin("html").tap(option => {
