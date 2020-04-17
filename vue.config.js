@@ -10,8 +10,7 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: "black",
     manifestOptions: {
       short_name: "noshiori",
-      background_color: "#D7BA89",
-      orientation: "landscape"
+      background_color: "#D7BA89"
     }
   },
   chainWebpack: config => {

@@ -39,12 +39,12 @@
 
           <template v-slot:cell(action)="data">
             <b-button-group>
-              <b-button @click="info(data.item)">✎</b-button>
               <b-button
                 variant="outline-secondary"
                 @click="updateProgress(data.item)"
                 >⇧</b-button
               >
+              <b-button @click="info(data.item)">✎</b-button>
             </b-button-group>
           </template>
 
